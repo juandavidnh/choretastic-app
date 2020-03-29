@@ -1,17 +1,28 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import './AddHomeForm.css'
 
 class AddHomeForm extends Component {
 
     static defaultProps = {
-        addHomeFunction: () => {}
+        addHomeFunction: () => {},
+        users: [],
+        homes: []
     }
 
     handleSubmit = ev => {
         ev.preventDefault()
         const { homeName, password, repeatPassword } = ev.target
 
-        this.props.addHomeFunction(homeName, password, repeatPassword)
+        const homeNameV = homeName.value
+        const passwordV = password.value
+        const repeatPasswordV = repeatPassword.value
+
+        const usersArray = this.props.users
+        const user = usersArray.find(user => parseInt(user.id) === parseInt(window.sessionStorage.getItem("userId")))
+
+        this.props.addHomeFunction(parseInt(user.id),homeNameV, passwordV, repeatPasswordV)
+        this.props.history.push('/task-list')
     }
 
     render() {
@@ -20,19 +31,19 @@ class AddHomeForm extends Component {
                 onSubmit = {this.handleSubmit}
                 className = 'addHomeForm'
             >
-                <label for="homeName">Home Name:</label>
+                <label htmlFor="homeName">Home Name:</label>
                 <input 
                     type="text" 
                     name="homeName" 
                     id="home-name" 
                 /><br />
-                <label for="password">Password (new home members will need to enter this pasword):</label>
+                <label htmlFor="password">Password (new home members will need to enter this pasword):</label>
                 <input 
                     type="password" 
                     name="password" 
                     id="password" 
                 /><br />
-                <label for="repeatPassword">Repeat password:</label>
+                <label htmlFor="repeatPassword">Repeat password:</label>
                 <input 
                     type="password" 
                     name="repeatPassword" 
@@ -45,4 +56,4 @@ class AddHomeForm extends Component {
     }
 }
 
-export default AddHomeForm
+export default withRouter(AddHomeForm)

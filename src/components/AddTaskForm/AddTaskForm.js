@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import './AddTaskForm.css'
 
 class AddTaskForm extends Component {
@@ -11,7 +12,8 @@ class AddTaskForm extends Component {
         ev.preventDefault()
         const { taskName, taskValue, taskOwner } = ev.target
         
-        this.props.addTaskFunction(taskName, taskValue, taskOwner)
+        this.props.addTaskFunction(taskName.value, taskValue.value, taskOwner.value)
+        this.props.history.push('/task-list')
     }
 
     render() {
@@ -20,9 +22,9 @@ class AddTaskForm extends Component {
                 onSubmit = {this.handleSubmit}
                 className = "addTaskForm"
             >
-                <label for="taskName">Task Name:</label>
-                <input type="text" name="taskName" id="task-name" />
-                <label for="taskValue">Number of points (1-10):</label>
+                <label htmlFor="taskName">Task Name:</label>
+                <input type="text" name="taskName" id="task-name" /><br /><br />
+                <label htmlFor="taskValue">Number of points (1-10):</label>
                 <select id="task-value" name="taskValue">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -34,19 +36,19 @@ class AddTaskForm extends Component {
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
-                </select>
-                <label for="taskOwner">Assignee:</label>
+                </select><br /><br />
+                <label htmlFor="taskOwner">Assignee:</label>
                 <select id="task-owner" name="taskOwner">
                     {this.props.users.map((item) =>
                      <option 
                         key={item.id} 
                         value={item.id}
                     >{item.name}</option>)}
-                </select>
+                </select><br /><br />
                 <button type="submit">Submit</button>
         </form>
         )
     }
 }
 
-export default AddTaskForm
+export default withRouter(AddTaskForm)

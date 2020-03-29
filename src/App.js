@@ -32,11 +32,11 @@ class App extends React.Component {
       homes: data.homes,
       tasks: data.tasks,
       users: data.users,
-      isLoggedIn: Boolean(window.sessionStorage.getItem("isLoggedIn")),
+      isLoggedIn: window.sessionStorage.getItem("isLoggedIn")==="true",
     })
   }
 
-  addHome = (name, password, repeatPassword) => {
+  addHome = (userId, name, password, repeatPassword) => {
     if (password !== repeatPassword) {
       this.setState({
         error: true
@@ -53,7 +53,19 @@ class App extends React.Component {
     const homeArray = this.state.homes
     homeArray.push(newHome)
 
+    const usersArray = this.state.users
+    const user = usersArray.find(user => parseInt(user.id) === parseInt(userId))
+    const userIndex = usersArray.indexOf(user)
+
+    user.homeId = newHome.id
+
+    usersArray.splice(userIndex, 1, user)
+
+    window.sessionStorage.setItem("homeId", user.homeId)
+    window.sessionStorage.setItem("isLoggedIn", true)
+
     this.setState({
+      users: usersArray,
       homes: homeArray
     })
   }
@@ -68,14 +80,14 @@ class App extends React.Component {
       points: points,
       assigneeId: assigneeId,
       dateCreated: date,
-      status: "pending"
+      status: "Pending"
     }
 
     const tasksArray = this.state.tasks
-    const newTasksArray = tasksArray.push(newTask)
+    tasksArray.push(newTask)
 
     this.setState({
-      tasks: newTasksArray
+      tasks: tasksArray
     })
   }
 
@@ -97,6 +109,7 @@ class App extends React.Component {
 
     this.setState({
       tasks: tasksArray,
+      isLoggedIn: true
     })
 
   }
@@ -142,10 +155,11 @@ class App extends React.Component {
 
     const usersArray = this.state.users
     const selectUser = usersArray.find(user => parseInt(user.id) === parseInt(userId))
+    const userIndex = usersArray.indexOf(selectUser)
 
     selectUser.homeId = selectHome.id
 
-    usersArray.splice(parseInt(userId)-1, 1, selectUser)
+    usersArray.splice(userIndex, 1, selectUser)
 
     window.sessionStorage.setItem("homeId", selectUser.homeId)
     window.sessionStorage.setItem("isLoggedIn", true)
@@ -191,22 +205,30 @@ class App extends React.Component {
 
   checkOffTask = (taskId) => {
     const tasksArray = this.state.tasks
-    const selectTask = tasksArray.find(task => task.id === taskId)
+    const task = tasksArray.find(task => parseInt(task.id) === parseInt(taskId))
+    const taskIndex = tasksArray.indexOf(task)
 
-    selectTask.status = "Done"
+    task.status = "Done"
     
-    tasksArray.splice(taskId, 1, selectTask)
+    tasksArray.splice(taskIndex, 1, task)
 
-    const newTasksArray = tasksArray
+    const usersArray = this.state.users
+    const user = usersArray.find(user => parseInt(user.id) === parseInt(task.assigneeId))
+    const userIndex = usersArray.indexOf(user)
+    const taskPoints = parseInt(task.points)
+
+    user.points = parseInt(user.points) + taskPoints
+
+    usersArray.splice(userIndex, 1, user)
 
     this.setState({
-      tasks: newTasksArray
+      tasks: tasksArray,
+      users: usersArray
     })
   }
 
   logOut = () => {
     window.sessionStorage.setItem("isLoggedIn", false)
-
 
     this.setState({
       isLoggedIn: false,
@@ -295,6 +317,8 @@ class App extends React.Component {
               <AddHomePage 
                 {...props}
                 addHomeFunction = {this.addHome}
+                users = {this.state.users}
+                homes = {this.state.homes}
               />
             }
           />

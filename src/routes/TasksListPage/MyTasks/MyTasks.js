@@ -16,7 +16,7 @@ class MyTasks extends Component {
     render() {
         const user = this.props.users.find(user => parseInt(user.id) === parseInt(window.sessionStorage.getItem("userId")))
         const taskArray = this.props.tasks
-        let tasks = taskArray.filter(task => task.assigneeId === user.id)
+        let tasks = taskArray.filter(task => parseInt(task.assigneeId) === parseInt(user.id))
 
         
         
@@ -24,7 +24,7 @@ class MyTasks extends Component {
                 <main>
                     <TasksNav path={this.props.match.path}/>
                     <Header headerContent="Chore List" />
-                    <TasksList users={user} tasks={tasks} deleteTaskFunction={this.props.deleteTaskFunction} checkOffFunction={this.props.checkOffFunction}/>           
+                    <TasksList users={user} tasks={tasks} deleteTaskFunction={this.props.deleteTaskFunction} checkOffFunction={this.props.checkOffTaskFunction}/>           
                 </main>
        )
     }

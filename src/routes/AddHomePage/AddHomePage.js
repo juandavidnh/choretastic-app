@@ -4,7 +4,9 @@ import './AddHomePage.css'
 
 class AddHomePage extends Component {
     static defaultProps = {
-        addHomeFunction: () => {}
+        addHomeFunction: () => {},
+        users: [],
+        homes: []
     }
 
     render() {
@@ -12,10 +14,12 @@ class AddHomePage extends Component {
         return(
             
             <main>
-                <section class="main-section-w">
+                <section className="add-home">
                     <h2>Add Home</h2>
                     <AddHomeForm
                         addHomeFunction={this.props.addHomeFunction} 
+                        users = {this.props.users}
+                        homes = {this.props.homes}
                     />
                 </section>
             </main>

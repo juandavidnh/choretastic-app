@@ -19,3 +19,7 @@
     font-style: italic;
     margin-right: 10px;
 }
+
+.taskDone{
+    text-decoration: line-through;
+}

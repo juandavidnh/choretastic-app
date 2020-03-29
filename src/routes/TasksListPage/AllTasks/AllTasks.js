@@ -31,7 +31,7 @@ class AllTasks extends Component {
                 <main>
                     <TasksNav path={this.props.match.path}/>
                     <Header headerContent="Chore List" />
-                    <TasksList users={userList} tasks={taskList} checkOffFunction={this.props.checkOffFunction} deleteTaskFunction={this.props.deleteTaskFunction}/>           
+                    <TasksList users={userList} tasks={taskList} checkOffFunction={this.props.checkOffTaskFunction} deleteTaskFunction={this.props.deleteTaskFunction}/>           
                 </main>
         )
     }

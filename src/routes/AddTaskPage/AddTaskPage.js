@@ -13,8 +13,8 @@ class AddTaskPage extends Component {
         return(
             
             <main>
-                <section class="main-section-w">
-                    <h2>Add Home</h2>
+                <section className="add-task-page">
+                    <h2>Add Task</h2>
                     <AddTaskForm
                         addTaskFunction={this.props.addTaskFunction} 
                         users={this.props.users}

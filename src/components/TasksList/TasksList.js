@@ -7,7 +7,7 @@ class TasksList extends Component {
     static defaultProps = {
         users: [],
         tasks: [],
-        checkOffTaskFunction: () => {},
+        checkOffFunction: () => {},
         deleteTaskFunction: () => {}
     }
 
@@ -17,7 +17,7 @@ class TasksList extends Component {
                 key={index} 
                 users={this.props.users} 
                 task={task}
-                checkOffTaskFunction={this.props.checkOffTaskFunction} 
+                checkOffTaskFunction={this.props.checkOffFunction} 
                 deleteTaskFunction={this.props.deleteTaskFunction} 
             />
         )

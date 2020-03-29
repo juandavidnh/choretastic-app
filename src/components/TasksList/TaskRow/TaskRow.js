@@ -18,11 +18,12 @@ class TaskRow extends Component {
                 <TaskItem 
                     users={this.props.users} 
                     task={this.props.task}
-                    checkOffTaskFunction={this.props.checkOffTaskFunction}
+                    
                 />
                 <TaskActions 
                     task={this.props.task}
                     deleteTaskFunction={this.props.deleteTaskFunction}
+                    checkOffTaskFunction={this.props.checkOffTaskFunction}
                 />
             </section>
         )
