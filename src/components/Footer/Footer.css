@@ -1,0 +1,10 @@
+footer{
+    padding: 3% 60px; 
+    text-align: center;
+    background-color: grey;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

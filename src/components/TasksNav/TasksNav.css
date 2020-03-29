@@ -1,0 +1,21 @@
+.taskNav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:blanchedalmond;
+
+}
+
+.taskNav li{
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.taskNav ul{
+    padding-left: 0;
+}
+
+.bold{
+    font-weight: bold;
+}

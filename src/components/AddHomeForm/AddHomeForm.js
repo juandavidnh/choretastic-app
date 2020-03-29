@@ -1,26 +1,20 @@
 import React, { Component } from 'react'
-import STORE from '../../dummy-store'
+import './AddHomeForm.css'
 
 class AddHomeForm extends Component {
-    state = { error: null }
+
+    static defaultProps = {
+        addHomeFunction: () => {}
+    }
 
     handleSubmit = ev => {
         ev.preventDefault()
         const { homeName, password, repeatPassword } = ev.target
-        const idNumber = STORE.homes.length + 1
 
-        STORE.homes.push({
-            "id": idNumber,
-            "home-name": homeName,
-            "password": password,
-            "repeat-password": repeatPassword,
-        })
+        this.props.addHomeFunction(homeName, password, repeatPassword)
     }
 
-
-
     render() {
-        const { error } = this.state
         return(
             <form
                 onSubmit = {this.handleSubmit}

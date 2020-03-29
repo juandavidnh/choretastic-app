@@ -1,0 +1,22 @@
+.scoreBoardList{
+    background-color: #E0E0E0;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.position{
+    font-weight: bold;
+}
+
+

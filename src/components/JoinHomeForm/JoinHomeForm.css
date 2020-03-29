@@ -1,0 +1,12 @@
+p{
+    text-align: center;
+}
+
+.button{
+    height: 40px;
+    width: 150px;
+    background-color: lightgrey;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding-top: 0.5em;
+}

@@ -1,0 +1,27 @@
+header{
+    background-color: lightgrey;
+    padding: 3% 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+header li{
+    width: 80px;
+    text-align: right;
+}
+
+header li, header h1, header nav{
+    display: inline-block;
+
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    font-size: 20px;
+}
+

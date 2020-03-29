@@ -1,0 +1,21 @@
+
+.taskItem ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 0;
+}
+
+.taskItem li{
+    display: inline-block;
+    
+}
+
+.taskItem{
+    flex-basis: 40%;
+}
+
+.assignee{
+    font-style: italic;
+    margin-right: 10px;
+}

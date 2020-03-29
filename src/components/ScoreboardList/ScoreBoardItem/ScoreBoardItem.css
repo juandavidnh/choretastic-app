@@ -1,0 +1,13 @@
+.scoreItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.position{
+    flex-basis: 10%;
+}
