@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../../components/Header/Header'
+import TasksNav from '../../components/TasksNav/TasksNav'
 import LandingBodySection from '../../components/LandingBodySections/LandingBodySection'
 import './LandingPage.css'
 import manWashingDishes from '../../media/photo-of-a-man-washing-dish-plates-3771047.jpg'
@@ -8,7 +9,9 @@ import manCleaningTable from '../../media/photo-of-man-cleaning-table-3890170.jp
 
 
 class LandingPage extends Component {
-
+    static defaultProps = {
+        isLoggedIn: false
+    }
 
     render() {
         const bodyContent = [
@@ -30,6 +33,7 @@ class LandingPage extends Component {
             
                
                 <main>
+                    {this.props.isLoggedIn && <TasksNav />}
                     <Header headerContent="Gamifying Household Chores" />
                     <LandingBodySection leftSection={bodyContent[0].leftSide} rightSection={bodyContent[0].rightSide}/>
                     <LandingBodySection leftSection={bodyContent[1].leftSide} rightSection={bodyContent[1].rightSide}/>

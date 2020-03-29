@@ -16,7 +16,7 @@ class JoinHomePage extends Component {
                 
                 <main>
                 <section className="main-section-w">
-                    <h2>Add Home</h2>
+                    <h2>Join Home</h2>
                     <JoinHomeForm
                         joinHomeFunction={this.props.joinHomeFunction} 
                         user = {user}

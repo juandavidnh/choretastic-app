@@ -38,9 +38,13 @@ class App extends React.Component {
 
   addHome = (userId, name, password, repeatPassword) => {
     if (password !== repeatPassword) {
-      this.setState({
-        error: true
-      })
+      throw new Error('Password and repeat password do not match')
+    }
+
+    for(let i = 0; i < this.state.homes.length; i++){
+      if(name===this.state.homes[i].homeName){
+        throw new Error('Home name already exists, please try a different one')
+      }
     }
 
     const newId = this.state.homes.length + 1
@@ -66,7 +70,8 @@ class App extends React.Component {
 
     this.setState({
       users: usersArray,
-      homes: homeArray
+      homes: homeArray,
+      isLoggedIn: true,
     })
   }
 
@@ -116,9 +121,13 @@ class App extends React.Component {
 
   signUp = (email, password, repeatPassword, name, lastName, nickname) => {
     if (password !== repeatPassword) {
-      this.setState({
-        error: true
-      })
+      throw new Error(`Passwords don't match`)
+    }
+
+    for(let i = 0; i < this.state.users.length; i++){
+      if(email===this.state.users[i].email){
+        throw new Error(`User already exists, please click on 'I have an account already'`)
+      }
     }
 
     const usersArray = this.state.users
@@ -130,7 +139,8 @@ class App extends React.Component {
       password: password,
       name: name,
       lastName: lastName,
-      nickname: nickname
+      nickname: nickname,
+      points: 0
     }
 
     window.sessionStorage.setItem("userId", newId)
@@ -147,10 +157,12 @@ class App extends React.Component {
     const homesArray = this.state.homes
     const selectHome = homesArray.find(home => home.homeName === homeName)
 
+    if(selectHome === undefined){
+      throw new Error('Home not found, please try again.')
+    }
+
     if(password !== selectHome.password) {
-      this.setState({
-        error: true
-      })
+      throw new Error('Incorrect password, please try again.')
     }
 
     const usersArray = this.state.users
@@ -172,14 +184,14 @@ class App extends React.Component {
 
   logIn = (userEmail, password) => {
     const usersArray = this.state.users
-    console.log(usersArray)
     const selectUser = usersArray.find(user => user.email === userEmail)
-    console.log(selectUser)
+
+    if(selectUser === undefined){
+      throw new Error('User not found, please try again.')
+    }
     
     if(password !== selectUser.password){
-      this.setState({
-        error: true
-      })
+      throw new Error('Incorrect password, please try again.')
     }
 
     window.sessionStorage.setItem("userId", selectUser.id)
@@ -248,6 +260,7 @@ class App extends React.Component {
             render={(props) => 
               <LandingPage 
                 {...props}
+                isLoggedIn = {this.state.isLoggedIn}
               />}
           />
           <Route
@@ -308,6 +321,7 @@ class App extends React.Component {
                 {...props}
                 addTaskFunction = {this.addTask}
                 users = {this.state.users}
+                homes = {this.state.homes}
               />
             }
           />
