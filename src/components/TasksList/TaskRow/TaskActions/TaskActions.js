@@ -10,8 +10,11 @@ class TaskActions extends Component {
 
     handleDelete = ev => {
         ev.preventDefault()
+        console.log("handled delete")
 
         const taskId = this.props.task.id
+        console.log(taskId)
+
         this.props.deleteTaskFunction(taskId)
     }
 
@@ -20,7 +23,7 @@ class TaskActions extends Component {
             <div className = "taskActions">
                 <ul>
                     <li><button type="button">Done</button></li>
-                    <li><p><Link to="/assign-task">Assign</Link></p></li>
+                    <li><p><Link to={`/assign-task/`+this.props.task.id}>Assign</Link></p></li>
                     <li><button type="button" onClick={this.handleDelete}>Delete</button></li>
                 </ul>
             </div>

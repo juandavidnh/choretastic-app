@@ -24,7 +24,7 @@ class MyTasks extends Component {
                 <main>
                     <TasksNav path={this.props.match.path}/>
                     <Header headerContent="Chore List" />
-                    <TasksList users={user} tasks={tasks} home={this.props.home}/>           
+                    <TasksList users={user} tasks={tasks} deleteTaskFunction={this.props.deleteTaskFunction} checkOffFunction={this.props.checkOffFunction}/>           
                 </main>
        )
     }

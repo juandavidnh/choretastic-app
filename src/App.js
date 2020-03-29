@@ -81,8 +81,9 @@ class App extends React.Component {
 
   assignTask = (taskId, assigneeId) => {
     const tasksArray = this.state.tasks
-    const taskSelect= tasksArray.find(task => task.id === taskId)
+    const taskSelect= tasksArray.find(task => parseInt(task.id) === taskId)
     const taskIndex = tasksArray.indexOf(taskSelect)
+    
     const newTask = {
       id: taskSelect.id,
       taskName: taskSelect.taskName,
@@ -92,10 +93,10 @@ class App extends React.Component {
       status: taskSelect.status
     }
 
-    const newTasksAray = tasksArray.splice(taskIndex, 1, newTask)
+    tasksArray.splice(taskIndex, 1, newTask)
 
     this.setState({
-      tasks: newTasksAray
+      tasks: tasksArray,
     })
 
   }
@@ -178,10 +179,13 @@ class App extends React.Component {
  
   deleteTask = (taskId) => {
     const tasksArray = this.state.tasks
-    const newTasksArray = tasksArray.splice(taskId, 1)
+    const task = tasksArray.find(task => parseInt(task.id) === parseInt(taskId))
+    const taskIndex = tasksArray.indexOf(task)
+
+    tasksArray.splice(taskIndex, 1)
 
     this.setState({
-      tasks: newTasksArray
+      tasks: tasksArray
     })
   }
 
@@ -264,11 +268,14 @@ class App extends React.Component {
             }
           />
           <Route
-            path={'/assign-task'}
+            path={'/assign-task/:taskId'}
             render={(props) => 
               <AssignPage 
                 {...props}
                 assignTaskFunction = {this.assignTask}
+                users = {this.state.users}
+                tasks = {this.state.tasks}
+                homes = {this.state.homes}
               />
             }
           />

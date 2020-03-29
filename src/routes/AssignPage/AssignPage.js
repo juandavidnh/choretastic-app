@@ -2,23 +2,27 @@ import React, { Component } from 'react'
 import AssignTaskForm from '../../components/AssignForm/AssignForm'
 import './AssignPage.css'
 
-class LoginPage extends Component {
+class AssignPage extends Component {
     static defaultProps = {
         assignTaskFunction: () => {},
         users: [],
-        task: {}
+        tasks: [],
+        homes: []
     }
 
     render() {
+        const taskItem = this.props.tasks.find(task => task.id === this.props.match.params.taskId)
+        const home = this.props.homes.find(home => parseInt(home.id) === parseInt(window.sessionStorage.getItem("homeId")))
+        const userList = this.props.users.filter(user => parseInt(user.homeId) === parseInt(home.id))
 
         return(
             <main>
-                <section class="main-section-w">
-                    <h2>Log In</h2>
+                <section className="assign-task-page">
+                    <h2>Assign Task</h2>
                     <AssignTaskForm 
-                        assignTaskFunction={this.props.loginFunction} 
-                        users={this.props.users}
-                        task={this.props.task}
+                        assignTaskFunction={this.props.assignTaskFunction} 
+                        users={userList}
+                        task={taskItem}
                     />
                 </section>
             </main>
@@ -26,4 +30,4 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage
+export default AssignPage
