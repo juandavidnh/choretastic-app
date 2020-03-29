@@ -13,6 +13,7 @@ import LoginPage from './routes/LoginPage/LoginPage'
 import ScoreboardPage from './routes/ScoreboardPage/ScoreboardPage'
 import SignUpPage from './routes/SignUpPage/SignUpPage'
 import STORE from './dummy-store'
+import AddFamilyMemberPage from './routes/AddFamilyMemberPage/AddFamilyMemberPage'
 import './App.css'
 
 class App extends React.Component {
@@ -32,7 +33,6 @@ class App extends React.Component {
       homes: data.homes,
       tasks: data.tasks,
       users: data.users,
-      isLoggedIn: window.sessionStorage.getItem("isLoggedIn")==="true",
     })
   }
 
@@ -66,7 +66,6 @@ class App extends React.Component {
     usersArray.splice(userIndex, 1, user)
 
     window.sessionStorage.setItem("homeId", user.homeId)
-    window.sessionStorage.setItem("isLoggedIn", true)
 
     this.setState({
       users: usersArray,
@@ -150,7 +149,38 @@ class App extends React.Component {
     this.setState({
       users: usersArray,
     })
+  }
 
+  addFamilyMember = (email, password, repeatPassword, name, lastName, nickname) => {
+    if (password !== repeatPassword) {
+      throw new Error(`Passwords don't match`)
+    }
+
+    for(let i = 0; i < this.state.users.length; i++){
+      if(email===this.state.users[i].email){
+        throw new Error(`User already exists, please click on 'I have an account already'`)
+      }
+    }
+
+    const usersArray = this.state.users
+
+    const newId = this.state.users.length + 1
+    const newUser = {
+      id: newId,
+      email: email,
+      password: password,
+      name: name,
+      lastName: lastName,
+      nickname: nickname,
+      points: 0,
+      homeId: parseInt(window.sessionStorage.getItem("homeId"))
+    }
+
+    usersArray.push(newUser)
+    
+    this.setState({
+      users: usersArray,
+    })
   }
 
   joinHome = (userId, password, homeName) => {
@@ -174,7 +204,6 @@ class App extends React.Component {
     usersArray.splice(userIndex, 1, selectUser)
 
     window.sessionStorage.setItem("homeId", selectUser.homeId)
-    window.sessionStorage.setItem("isLoggedIn", true)
     
     this.setState({
       users: usersArray, 
@@ -196,7 +225,6 @@ class App extends React.Component {
 
     window.sessionStorage.setItem("userId", selectUser.id)
     window.sessionStorage.setItem("homeId", selectUser.homeId)
-    window.sessionStorage.setItem("isLoggedIn", true)
 
     this.setState({
       isLoggedIn: true,
@@ -240,7 +268,6 @@ class App extends React.Component {
   }
 
   logOut = () => {
-    window.sessionStorage.setItem("isLoggedIn", false)
 
     this.setState({
       isLoggedIn: false,
@@ -333,6 +360,15 @@ class App extends React.Component {
                 addHomeFunction = {this.addHome}
                 users = {this.state.users}
                 homes = {this.state.homes}
+              />
+            }
+          />
+          <Route
+            path={'/add-family-member'}
+            render={(props) => 
+              <AddFamilyMemberPage 
+                {...props}
+                addFamilyMemberFunction = {this.addFamilyMember}
               />
             }
           />

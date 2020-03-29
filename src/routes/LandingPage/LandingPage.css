@@ -1,3 +1,15 @@
 img{
     width: 100%;
 }
+
+.signUpButton{
+    padding: 2% 60px;
+}
+
+.signUpButton p {
+    background-color: darkgray;
+    width: 100px;
+    height: 40px;
+    margin: 0 auto;
+    padding-top: 10px;
+}

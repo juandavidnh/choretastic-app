@@ -1,0 +1,11 @@
+.addFamilyMember{
+    padding: 2% 60px;
+}
+
+.addFamilyMember p {
+    background-color: darkgray;
+    width: 150px;
+    height: 40px;
+    margin: 0 auto;
+    padding-top: 10px;
+}

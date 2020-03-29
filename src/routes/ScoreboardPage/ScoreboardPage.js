@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import ScoreBoardList from '../../components/ScoreboardList/ScoreBoardList'
 import TasksNav from '../../components/TasksNav/TasksNav'
@@ -19,7 +20,8 @@ class ScoreboardPage extends Component {
                 <main className="scoreBoardPage">
                     <TasksNav path={this.props.match.path}/>
                     <Header headerContent="Family Scoreboard"/>
-                    <ScoreBoardList users={userList} />           
+                    <ScoreBoardList users={userList} /> 
+                    <div className="addFamilyMember"><p className="addMember"><Link to="/add-family-member">Add Family Member</Link></p></div>         
                 </main>
         )
     }
