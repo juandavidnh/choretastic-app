@@ -56,7 +56,7 @@ class JoinHomeForm extends Component {
                     id="home-name" 
                     onChange={e => this.updateHomeName(e.target.value)}/>
                     <br /><br />
-                <label htmlFor="password">Password (current home members should provide you with a home password):</label>
+                <label htmlFor="password">Password:</label>
                 <input 
                     type="password" 
                     name="password" 
