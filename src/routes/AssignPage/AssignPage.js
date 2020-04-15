@@ -1,19 +1,40 @@
 import React, { Component } from 'react'
 import AssignTaskForm from '../../components/AssignForm/AssignForm'
+import UserApiService from '../../services/user-api-service'
+import TaskApiService from '../../services/task-api-service'
 import './AssignPage.css'
 
 class AssignPage extends Component {
     static defaultProps = {
         assignTaskFunction: () => {},
+    }
+
+    state ={
         users: [],
-        tasks: [],
-        homes: []
+        tasks: []
+    }
+
+    componentDidMount(){
+        TaskApiService.getTasks() 
+            .then(tasks => {
+                this.setState({
+                    tasks: tasks
+                })
+            })
+            .catch(res => alert(res.error))
+
+        UserApiService.getUsers() 
+            .then(users => {
+                this.setState({
+                    users: users
+                })
+            })
+            .catch(res => alert(res.error))
     }
 
     render() {
-        const taskItem = this.props.tasks.find(task => task.id === this.props.match.params.taskId)
-        const home = this.props.homes.find(home => parseInt(home.id) === parseInt(window.sessionStorage.getItem("homeId")))
-        const userList = this.props.users.filter(user => parseInt(user.homeId) === parseInt(home.id))
+        const taskItem = this.state.tasks.find(task => parseInt(task.id) === parseInt(this.props.match.params.taskId))
+        console.log(taskItem)
 
         return(
             <main>
@@ -21,7 +42,7 @@ class AssignPage extends Component {
                     <h2>Assign Task</h2>
                     <AssignTaskForm 
                         assignTaskFunction={this.props.assignTaskFunction} 
-                        users={userList}
+                        users={this.state.users}
                         task={taskItem}
                     />
                 </section>

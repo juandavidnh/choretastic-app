@@ -16,10 +16,9 @@ class AssignTaskForm extends Component {
 
         const { taskOwner } = ev.target
         const taskId = this.props.task.id
-        const newUser = this.props.users.find(user => user.name === taskOwner.value)
+        const newUser = this.props.users.find(user => user.first_name === taskOwner.value)
 
         this.props.assignTaskFunction(parseInt(taskId), newUser.id)
-        this.props.history.push('/task-list')
     }
 
     render() {
@@ -33,7 +32,7 @@ class AssignTaskForm extends Component {
                     {this.props.users.map((item) =>
                         <option 
                             key={item.id} 
-                        >{item.name}</option>)}
+                        >{item.first_name}</option>)}
                 </select>
                 <button type="submit">Submit</button>
             </form>

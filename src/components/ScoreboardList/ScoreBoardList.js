@@ -11,7 +11,7 @@ class ScoreBoardList extends Component {
         
         const usersSort = this.props.users.sort((a,b) => b.points - a.points)
         const usersList = usersSort.map((user, index) => 
-            <ScoreBoardItem key={index} position={index + 1} user={user.name} score={user.points} />
+            <ScoreBoardItem key={index} position={index + 1} user={user.first_name} score={user.points} />
         )
 
         return(

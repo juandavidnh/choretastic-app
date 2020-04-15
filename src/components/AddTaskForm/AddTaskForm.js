@@ -13,7 +13,7 @@ class AddTaskForm extends Component {
         const { taskName, taskValue, taskOwner } = ev.target
         
         this.props.addTaskFunction(taskName.value, taskValue.value, taskOwner.value)
-        this.props.history.push('/task-list')
+
     }
 
     render() {
@@ -43,7 +43,7 @@ class AddTaskForm extends Component {
                      <option 
                         key={item.id} 
                         value={item.id}
-                    >{item.name}</option>)}
+                    >{item.first_name}</option>)}
                 </select><br /><br />
                 <button type="submit">Submit</button>
         </form>

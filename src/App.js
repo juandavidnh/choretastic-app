@@ -12,8 +12,12 @@ import LandingPage from './routes/LandingPage/LandingPage'
 import LoginPage from './routes/LoginPage/LoginPage'
 import ScoreboardPage from './routes/ScoreboardPage/ScoreboardPage'
 import SignUpPage from './routes/SignUpPage/SignUpPage'
-import STORE from './dummy-store'
 import AddFamilyMemberPage from './routes/AddFamilyMemberPage/AddFamilyMemberPage'
+import AuthApiService from './services/auth-api-service'
+import UserApiService from './services/user-api-service'
+import TaskApiService from './services/task-api-service'
+import TokenService from './services/token-service'
+import { withRouter } from 'react-router'
 import './App.css'
 
 class App extends React.Component {
@@ -24,16 +28,6 @@ class App extends React.Component {
     users: [],
     error: null,
     isLoggedIn: false
-  }
-  
-  componentDidMount() {
-    const data = STORE
-
-    this.setState({
-      homes: data.homes,
-      tasks: data.tasks,
-      users: data.users,
-    })
   }
 
   addHome = (userId, name, password, repeatPassword) => {
@@ -75,47 +69,21 @@ class App extends React.Component {
   }
 
   addTask = (taskName, points, assigneeId) => {
-    const date = new Date()
-    const newId = this.state.tasks.length + 1
-
-    const newTask = {
-      id: newId,
-      taskName: taskName,
-      points: points,
-      assigneeId: assigneeId,
-      dateCreated: date,
-      status: "Pending"
-    }
-
-    const tasksArray = this.state.tasks
-    tasksArray.push(newTask)
-
-    this.setState({
-      tasks: tasksArray
-    })
+    TaskApiService.postTask(taskName, assigneeId, points)
+      .then(res =>  {
+          this.props.history.push("/task-list")
+        }
+      )
+      .catch(res => alert(res.error))
   }
 
   assignTask = (taskId, assigneeId) => {
-    const tasksArray = this.state.tasks
-    const taskSelect= tasksArray.find(task => parseInt(task.id) === taskId)
-    const taskIndex = tasksArray.indexOf(taskSelect)
-    
-    const newTask = {
-      id: taskSelect.id,
-      taskName: taskSelect.taskName,
-      points: taskSelect.points,
-      assigneeId: assigneeId,
-      dateCreated: taskSelect.dateCreated, 
-      status: taskSelect.status
-    }
-
-    tasksArray.splice(taskIndex, 1, newTask)
-
-    this.setState({
-      tasks: tasksArray,
-      isLoggedIn: true
-    })
-
+    TaskApiService.assignTask(taskId, assigneeId)
+      .then(res =>  {
+          this.props.history.push("/task-list")
+        }
+      )
+      .catch(res => alert(res.error))
   }
 
   signUp = (email, password, repeatPassword, name, lastName, nickname) => {
@@ -156,31 +124,13 @@ class App extends React.Component {
       throw new Error(`Passwords don't match`)
     }
 
-    for(let i = 0; i < this.state.users.length; i++){
-      if(email===this.state.users[i].email){
-        throw new Error(`User already exists, please click on 'I have an account already'`)
-      }
-    }
+    UserApiService.addUser(name, lastName, nickname, email, password)
+      .then(res => {
+          this.props.history.push('/score-board')
+        }
+      )
+      .catch(res => alert(res.error))
 
-    const usersArray = this.state.users
-
-    const newId = this.state.users.length + 1
-    const newUser = {
-      id: newId,
-      email: email,
-      password: password,
-      name: name,
-      lastName: lastName,
-      nickname: nickname,
-      points: 0,
-      homeId: parseInt(window.sessionStorage.getItem("homeId"))
-    }
-
-    usersArray.push(newUser)
-    
-    this.setState({
-      users: usersArray,
-    })
   }
 
   joinHome = (userId, password, homeName) => {
@@ -212,23 +162,16 @@ class App extends React.Component {
   }
 
   logIn = (userEmail, password) => {
-    const usersArray = this.state.users
-    const selectUser = usersArray.find(user => user.email === userEmail)
 
-    if(selectUser === undefined){
-      throw new Error('User not found, please try again.')
-    }
-    
-    if(password !== selectUser.password){
-      throw new Error('Incorrect password, please try again.')
-    }
-
-    window.sessionStorage.setItem("userId", selectUser.id)
-    window.sessionStorage.setItem("homeId", selectUser.homeId)
-
-    this.setState({
-      isLoggedIn: true,
+    AuthApiService.postLoginUser({
+      email: userEmail,
+      password
     })
+      .then(res => {
+          TokenService.saveAuthToken(res.authToken)
+          this.props.history.push('/task-list-own')
+      })
+      .catch(res => alert(res.error))
   }
  
   deleteTask = (taskId) => {
@@ -244,27 +187,22 @@ class App extends React.Component {
   }
 
   checkOffTask = (taskId) => {
-    const tasksArray = this.state.tasks
-    const task = tasksArray.find(task => parseInt(task.id) === parseInt(taskId))
-    const taskIndex = tasksArray.indexOf(task)
+    TaskApiService.getTask(taskId)
+      .then(task => {
+        TaskApiService.checkOffTask(task.id)
 
-    task.status = "Done"
-    
-    tasksArray.splice(taskIndex, 1, task)
+        return task
+      })
+      .then(task => {
+        console.log(typeof(task.assignee_id))
+        UserApiService.getById(task.assignee_id)
+          .then(user => {
+            const newPoints = user.points + task.points
 
-    const usersArray = this.state.users
-    const user = usersArray.find(user => parseInt(user.id) === parseInt(task.assigneeId))
-    const userIndex = usersArray.indexOf(user)
-    const taskPoints = parseInt(task.points)
-
-    user.points = parseInt(user.points) + taskPoints
-
-    usersArray.splice(userIndex, 1, user)
-
-    this.setState({
-      tasks: tasksArray,
-      users: usersArray
-    })
+            UserApiService.addPoints(user.id, newPoints)
+          })
+      })
+      .catch(res => alert(res.error))
   }
 
   logOut = () => {
@@ -273,6 +211,8 @@ class App extends React.Component {
       isLoggedIn: false,
     })
   }
+
+  
 
 
   render() {
@@ -380,7 +320,7 @@ class App extends React.Component {
                 deleteTaskFunction = {this.deleteTask}
                 checkOffTaskFunction = {this.checkOffTask}
                 users = {this.state.users}
-                tasks = {this.state.tasks}
+                tasks = {this.populateTasks}
                 homes = {this.state.homes}
               />
             }
@@ -407,4 +347,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

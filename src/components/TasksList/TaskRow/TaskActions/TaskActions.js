@@ -6,7 +6,8 @@ class TaskActions extends Component {
     static defaultProps = {
         task: {},
         deleteTaskFunction: () => {},
-        checkOffTaskFunction: () => {}
+        checkOffTaskFunction: () => {},
+        taskDone: () => {}
     }
 
     handleDelete = ev => {
@@ -23,6 +24,8 @@ class TaskActions extends Component {
         const taskId = this.props.task.id
 
         this.props.checkOffTaskFunction(taskId)
+
+        this.props.taskDone(taskId)
     }
 
     render() {

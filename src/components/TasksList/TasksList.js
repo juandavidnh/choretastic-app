@@ -8,7 +8,8 @@ class TasksList extends Component {
         users: [],
         tasks: [],
         checkOffFunction: () => {},
-        deleteTaskFunction: () => {}
+        deleteTaskFunction: () => {},
+        taskDone: () => {}
     }
 
     render() {
@@ -19,6 +20,7 @@ class TasksList extends Component {
                 task={task}
                 checkOffTaskFunction={this.props.checkOffFunction} 
                 deleteTaskFunction={this.props.deleteTaskFunction} 
+                taskDone={this.props.taskDone}
             />
         )
 

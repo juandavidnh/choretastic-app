@@ -8,18 +8,18 @@ class LoginForm extends Component {
     }
 
     handleSubmit = ev => {
-        try{
             ev.preventDefault()
 
             const { email, password } = ev.target
 
-            this.props.loginFunction(email.value, password.value)
-            this.props.history.push('/task-list-own')
-        } catch(error) {
-            alert(error)
-        }
+            this.props.loginFunction(
+                email.value, 
+                password.value
+                )
+                
+        } 
 
-    }
+    
 
     render() {
         return(
