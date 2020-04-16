@@ -61,7 +61,6 @@ class SignUpForm extends Component {
     }
 
     handleSubmit = ev => {
-        try{
             ev.preventDefault()
 
             const { email, password, repeatPassword, firstName, lastName, nickname } = this.state
@@ -73,11 +72,6 @@ class SignUpForm extends Component {
             const nicknameVal = nickname.value
         
             this.props.signUpFunction(emailVal, passwordVal, repeatPasswordVal, firstNameVal, lastNameVal, nicknameVal)
-            this.props.history.push('/join-home')
-        } catch(error) {
-            alert(error)
-        }
-
     }
 
     validateFirstName() {
@@ -109,7 +103,7 @@ class SignUpForm extends Component {
             return "Password is required"
         } else if (password.length < 8 || password.length > 72) {
             return "Password must be between 8 and 72 characters long"
-        } else if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)) {
+        } else if (!password.match(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])[\S]+/)) {
             return "Password must contain at least one lowercase letter, one uppercase letter, and one number"
         }
     }

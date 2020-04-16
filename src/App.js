@@ -91,32 +91,18 @@ class App extends React.Component {
       throw new Error(`Passwords don't match`)
     }
 
-    for(let i = 0; i < this.state.users.length; i++){
-      if(email===this.state.users[i].email){
-        throw new Error(`User already exists, please click on 'I have an account already'`)
-      }
-    }
-
-    const usersArray = this.state.users
-
-    const newId = this.state.users.length + 1
-    const newUser = {
-      id: newId,
-      email: email,
-      password: password,
-      name: name,
-      lastName: lastName,
-      nickname: nickname,
-      points: 0
-    }
-
-    window.sessionStorage.setItem("userId", newId)
-
-    usersArray.push(newUser)
-    
-    this.setState({
-      users: usersArray,
+    AuthApiService.postUser({
+      email,
+      password,
+      first_name: name,
+      last_name: lastName,
+      nickname
     })
+      .then(res => {
+        TokenService.saveAuthToken(res.authToken)
+        this.props.history.push('/join-home')
+      })
+      .catch(res => alert(res.error))
   }
 
   addFamilyMember = (email, password, repeatPassword, name, lastName, nickname) => {
@@ -133,32 +119,20 @@ class App extends React.Component {
 
   }
 
-  joinHome = (userId, password, homeName) => {
-    const homesArray = this.state.homes
-    const selectHome = homesArray.find(home => home.homeName === homeName)
-
-    if(selectHome === undefined){
-      throw new Error('Home not found, please try again.')
-    }
-
-    if(password !== selectHome.password) {
-      throw new Error('Incorrect password, please try again.')
-    }
-
-    const usersArray = this.state.users
-    const selectUser = usersArray.find(user => parseInt(user.id) === parseInt(userId))
-    const userIndex = usersArray.indexOf(selectUser)
-
-    selectUser.homeId = selectHome.id
-
-    usersArray.splice(userIndex, 1, selectUser)
-
-    window.sessionStorage.setItem("homeId", selectUser.homeId)
-    
-    this.setState({
-      users: usersArray, 
-      isLoggedIn: true,     
+  joinHome = (password, homeName) => {
+    AuthApiService.postLoginHome({
+      home_name: homeName,
+      password
     })
+      .then(home => {
+        UserApiService.getMyUser()
+          .then(user => {
+            UserApiService.insertHome(user.id, home.id)
+            this.props.history.push('/task-list')
+          })
+      })
+      .catch(res => alert(res.error))
+
   }
 
   logIn = (userEmail, password) => {
@@ -175,15 +149,8 @@ class App extends React.Component {
   }
  
   deleteTask = (taskId) => {
-    const tasksArray = this.state.tasks
-    const task = tasksArray.find(task => parseInt(task.id) === parseInt(taskId))
-    const taskIndex = tasksArray.indexOf(task)
-
-    tasksArray.splice(taskIndex, 1)
-
-    this.setState({
-      tasks: tasksArray
-    })
+    TaskApiService.deleteTask(taskId)
+      .catch(res => alert(res.error))
   }
 
   checkOffTask = (taskId) => {
@@ -194,7 +161,6 @@ class App extends React.Component {
         return task
       })
       .then(task => {
-        console.log(typeof(task.assignee_id))
         UserApiService.getById(task.assignee_id)
           .then(user => {
             const newPoints = user.points + task.points
@@ -264,8 +230,6 @@ class App extends React.Component {
               <JoinHomePage 
                 {...props}
                 joinHomeFunction = {this.joinHome}
-                users = {this.state.users}
-                homes = {this.state.homes}
               />
             }
           />

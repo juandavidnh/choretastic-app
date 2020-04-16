@@ -16,8 +16,6 @@ class JoinHomeForm extends Component {
 
     static defaultProps = {
         joinHomeFunction: () => {},
-        user: {},
-        homes: []
     }
 
     updateHomeName(homeName){
@@ -29,17 +27,11 @@ class JoinHomeForm extends Component {
     }
 
     handleSubmit = ev => {
-        try{
             ev.preventDefault()
 
             const { homeName, password }= this.state
-            const userId = this.props.user.id
         
-            this.props.joinHomeFunction(userId, password.value, homeName.value)
-            this.props.history.push('/task-list')
-        } catch(error) {
-            alert(error)
-        }
+            this.props.joinHomeFunction(password.value, homeName.value)
     }
 
     render() {

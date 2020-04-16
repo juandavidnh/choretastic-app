@@ -7,7 +7,8 @@ class TaskActions extends Component {
         task: {},
         deleteTaskFunction: () => {},
         checkOffTaskFunction: () => {},
-        taskDone: () => {}
+        taskDone: () => {}, 
+        taskDelete: () => {}
     }
 
     handleDelete = ev => {
@@ -16,6 +17,8 @@ class TaskActions extends Component {
         const taskId = this.props.task.id
 
         this.props.deleteTaskFunction(taskId)
+
+        this.props.taskDelete(taskId)
     }
 
     handleCheckOff = ev => {

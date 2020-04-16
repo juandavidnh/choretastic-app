@@ -9,7 +9,8 @@ class TaskRow extends Component {
         task: {},
         checkOffTaskFunction: () => {},
         deleteTaskFunction: () => {},
-        taskDone: () => {}
+        taskDone: () => {},
+        taskDelete: () => {}
     }
 
     render() {
@@ -26,6 +27,7 @@ class TaskRow extends Component {
                     deleteTaskFunction={this.props.deleteTaskFunction}
                     checkOffTaskFunction={this.props.checkOffTaskFunction}
                     taskDone={this.props.taskDone}
+                    taskDelete={this.props.taskDelete}
                 />
             </section>
         )

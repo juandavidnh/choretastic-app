@@ -88,6 +88,21 @@ const UserApiService = {
                 ? res.json().then(e => Promise.reject(e))
                 : res.json()
             )
+    },
+
+    getMyUser() {
+        return fetch(`${config.API_ENDPOINT}/users/own`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => 
+            (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+            )
     }
 }
 

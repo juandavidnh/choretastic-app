@@ -5,6 +5,7 @@ import TasksNav from '../../../components/TasksNav/TasksNav'
 import TaskApiService from '../../../services/task-api-service'
 import UserApiService from '../../../services/user-api-service'
 import ErrorBoundary from '../../../errorHandling/ErrorBoundary'
+import AddItem from '../../../components/TasksList/AddItem/AddItem'
 import './MyTasks.css'
 
 class MyTasks extends Component {
@@ -48,8 +49,20 @@ class MyTasks extends Component {
         this.setState({
             tasks
         })
-
     }
+
+    taskDelete = (taskId) => {
+        const tasks = this.state.tasks
+        const task = tasks.find(task => parseInt(task.id) === parseInt(taskId))
+        const taskIndex = tasks.indexOf(task)
+
+        tasks.splice(taskIndex, 1)
+
+        this.setState({
+            tasks
+        })
+    }
+    
 
     render() {
 
@@ -58,9 +71,12 @@ class MyTasks extends Component {
                     <TasksNav path={this.props.match.path}/>
                     <Header headerContent="Chore List" />
                     <ErrorBoundary>
-                    { (this.state.tasks.length >= 1 && this.state.users.length >= 1) 
-                        ? <TasksList users={this.state.users} tasks={this.state.tasks} deleteTaskFunction={this.props.deleteTaskFunction} checkOffFunction={this.props.checkOffTaskFunction} taskDone={this.taskDone} />   
-                        : null        
+                    { (this.state.tasks.length < 1 || this.state.users.length < 1 || this.state.tasks === "Enter your first task") 
+                        ? <> 
+                            <h3>Add your first task</h3> 
+                            <AddItem /> 
+                        </> 
+                        : <TasksList users={this.state.users} tasks={this.state.tasks} deleteTaskFunction={this.props.deleteTaskFunction} checkOffFunction={this.props.checkOffTaskFunction} taskDone={this.taskDone} taskDelete={this.taskDelete} />      
                     }
                     </ErrorBoundary>
                 </main>

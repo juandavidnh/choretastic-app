@@ -5,12 +5,9 @@ import './JoinHomePage.css'
 class JoinHomePage extends Component {
     static defaultProps = {
         joinHomeFunction: () => {},
-        users: [],
-        homes: []
     }
 
     render() {
-        const user = this.props.users.find(user => parseInt(user.id) === parseInt(window.sessionStorage.getItem("userId")))
 
         return(
                 
@@ -21,8 +18,6 @@ class JoinHomePage extends Component {
                     <p>You can also create a new home.</p>
                     <JoinHomeForm
                         joinHomeFunction={this.props.joinHomeFunction} 
-                        user = {user}
-                        homes = {this.props.homes}
                     />
                 </section>
                 </main>
