@@ -1,30 +1,38 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import TokenService from '../../services/token-service'
 import './Nav.css'
 
 class Nav extends Component {
-    static defaultProps = {
-        isLoggedIn: false,
-        logOut: () => {}
+    handleLogoutClick = () => {
+        TokenService.clearAuthToken()
     }
 
+    renderLogoutLink() {
+        return(
+            <ul>
+                <li><Link to='/' onClick={this.handleLogoutClick}>Log Out</Link></li>
+            </ul>
+        )
+    }
 
+    renderLoginLink() {
+        return(
+            <ul>
+                <li><Link to='/signup'>Sign up</Link></li>
+                <li><Link to='/login'>Sign in</Link></li>
+            </ul>
+        )
+    }
 
     render() {
-        const isLoggedIn = this.props.isLoggedIn
-
         return(
             <header>
                 <h1><Link to='/'>Choretastic</Link></h1>
                 <nav>
-                    {isLoggedIn
-                        ? <ul>
-                            <li><Link to='/' onClick={this.props.logOut}>Log Out</Link></li>
-                        </ul>
-                        : <ul>
-                            <li><Link to='/signup'>Sign up</Link></li>
-                            <li><Link to='/login'>Sign in</Link></li>
-                        </ul>
+                    {TokenService.hasAuthToken()
+                        ? this.renderLogoutLink()
+                        : this.renderLoginLink()
                     }
                 </nav>
             </header>

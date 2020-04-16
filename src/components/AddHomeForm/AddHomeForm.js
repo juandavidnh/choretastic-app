@@ -21,8 +21,6 @@ class AddHomeForm extends Component {
 
     static defaultProps = {
         addHomeFunction: () => {},
-        users: [],
-        homes: []
     }
 
     updateName(name){
@@ -38,7 +36,6 @@ class AddHomeForm extends Component {
     }
 
     handleSubmit = ev => {
-        try{
             ev.preventDefault()
             const { homeName, password, repeatPassword } = this.state
 
@@ -46,15 +43,7 @@ class AddHomeForm extends Component {
             const passwordV = password.value
             const repeatPasswordV = repeatPassword.value
 
-            const usersArray = this.props.users
-            const user = usersArray.find(user => parseInt(user.id) === parseInt(window.sessionStorage.getItem("userId")))
-
-            this.props.addHomeFunction(parseInt(user.id),homeNameV, passwordV, repeatPasswordV)
-            this.props.history.push('/task-list')
-        } catch(error) {
-            alert(error)
-        }
-        
+            this.props.addHomeFunction(homeNameV, passwordV, repeatPasswordV)
     }
 
     validateHomeName() {
@@ -72,7 +61,7 @@ class AddHomeForm extends Component {
             return "Password is required"
         } else if (password.length < 8 || password.length > 72) {
             return "Password must be between 8 and 72 characters long"
-        } else if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)) {
+        } else if (!password.match(/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])[\S]+/)) {
             return "Password must contain at least one lowercase letter, one uppercase letter, and one number"
         }
     }

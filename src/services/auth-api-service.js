@@ -1,4 +1,5 @@
 import config from '../config'
+import TokenService from './token-service'
 
 const AuthApiService = {
     postLoginUser(credentials) {
@@ -47,10 +48,11 @@ const AuthApiService = {
     },
 
     postHome(home) {
-        return fetch(`${config.API_ENDPOINT}/homes`, {
+        return fetch(`${config.API_ENDPOINT}/homes/add-home`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization': `bearer ${TokenService.getAuthToken()}`
             },
             body: JSON.stringify(home),
         })

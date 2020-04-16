@@ -13,6 +13,8 @@ import LoginPage from './routes/LoginPage/LoginPage'
 import ScoreboardPage from './routes/ScoreboardPage/ScoreboardPage'
 import SignUpPage from './routes/SignUpPage/SignUpPage'
 import AddFamilyMemberPage from './routes/AddFamilyMemberPage/AddFamilyMemberPage'
+import PrivateRoute from './components/Utils/PrivateRoute'
+import PublicOnlyRoute from './components/Utils/PublicRoute'
 import AuthApiService from './services/auth-api-service'
 import UserApiService from './services/user-api-service'
 import TaskApiService from './services/task-api-service'
@@ -30,42 +32,23 @@ class App extends React.Component {
     isLoggedIn: false
   }
 
-  addHome = (userId, name, password, repeatPassword) => {
+  addHome = (name, password, repeatPassword) => {
     if (password !== repeatPassword) {
       throw new Error('Password and repeat password do not match')
     }
 
-    for(let i = 0; i < this.state.homes.length; i++){
-      if(name===this.state.homes[i].homeName){
-        throw new Error('Home name already exists, please try a different one')
-      }
-    }
-
-    const newId = this.state.homes.length + 1
-    const newHome = {
-      id: newId,
-      password: password,
-      homeName: name
-    }
-
-    const homeArray = this.state.homes
-    homeArray.push(newHome)
-
-    const usersArray = this.state.users
-    const user = usersArray.find(user => parseInt(user.id) === parseInt(userId))
-    const userIndex = usersArray.indexOf(user)
-
-    user.homeId = newHome.id
-
-    usersArray.splice(userIndex, 1, user)
-
-    window.sessionStorage.setItem("homeId", user.homeId)
-
-    this.setState({
-      users: usersArray,
-      homes: homeArray,
-      isLoggedIn: true,
+    AuthApiService.postHome({
+      home_name: name,
+      password
     })
+      .then(home => {
+        UserApiService.getMyUser()
+          .then(user => {
+            UserApiService.insertHome(user.id, home.id)
+            this.props.history.push('/task-list')
+          })
+      })
+      .catch(res => alert(res.error))
   }
 
   addTask = (taskName, points, assigneeId) => {
@@ -171,134 +154,111 @@ class App extends React.Component {
       .catch(res => alert(res.error))
   }
 
-  logOut = () => {
-
-    this.setState({
-      isLoggedIn: false,
-    })
-  }
-
   
 
 
   render() {
     return(
     <div className="App">
-      <Nav isLoggedIn={this.state.isLoggedIn} logOut={this.logOut}/>
+      <Nav />
       <main className="App_main">
         <Switch>
           <Route
             exact
             path={'/'}
-            render={(props) => 
+            component={(props) => 
               <LandingPage 
                 {...props}
-                isLoggedIn = {this.state.isLoggedIn}
               />}
           />
-          <Route
+          <PublicOnlyRoute
             path={'/login'}
-            render={(props) => 
+            component={(props) => 
               <LoginPage 
                 {...props}
                 loginFunction = {this.logIn}
               />
             }
           />
-          <Route
+          <PublicOnlyRoute
             path={'/signup'}
-            render={(props) => 
+            component={(props) => 
               <SignUpPage 
                 {...props}
                 signUpFunction = {this.signUp}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/score-board'}
-            render={(props) => 
+            component={(props) => 
               <ScoreboardPage 
                 {...props}
-                users = {this.state.users}
-                homes = {this.state.homes}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/join-home'}
-            render={(props) => 
+            component={(props) => 
               <JoinHomePage 
                 {...props}
                 joinHomeFunction = {this.joinHome}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/assign-task/:taskId'}
-            render={(props) => 
+            component={(props) => 
               <AssignPage 
                 {...props}
                 assignTaskFunction = {this.assignTask}
-                users = {this.state.users}
-                tasks = {this.state.tasks}
-                homes = {this.state.homes}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/add-task'}
-            render={(props) => 
+            component={(props) => 
               <AddTaskPage 
                 {...props}
                 addTaskFunction = {this.addTask}
-                users = {this.state.users}
-                homes = {this.state.homes}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/add-home'}
-            render={(props) => 
+            component={(props) => 
               <AddHomePage 
                 {...props}
                 addHomeFunction = {this.addHome}
-                users = {this.state.users}
-                homes = {this.state.homes}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/add-family-member'}
-            render={(props) => 
+            component={(props) => 
               <AddFamilyMemberPage 
                 {...props}
                 addFamilyMemberFunction = {this.addFamilyMember}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/task-list-own'}
-            render={(props) => 
+            component={(props) => 
               <MyTasks
                 {...props}
                 deleteTaskFunction = {this.deleteTask}
                 checkOffTaskFunction = {this.checkOffTask}
-                users = {this.state.users}
-                tasks = {this.populateTasks}
-                homes = {this.state.homes}
               />
             }
           />
-          <Route
+          <PrivateRoute
             path={'/task-list'}
-            render={(props) => 
+            component={(props) => 
               <AllTasks
                 {...props}
                 deleteTaskFunction = {this.deleteTask}
                 checkOffTaskFunction = {this.checkOffTask}
-                users = {this.state.users}
-                tasks = {this.state.tasks}
-                homes = {this.state.homes}
               />
             }
           />

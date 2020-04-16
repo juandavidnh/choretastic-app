@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header'
 import TasksNav from '../../components/TasksNav/TasksNav'
 import LandingBodySection from '../../components/LandingBodySections/LandingBodySection'
 import { Link } from 'react-router-dom'
+import TokenService from '../../services/token-service'
 import './LandingPage.css'
 import manWashingDishes from '../../media/photo-of-a-man-washing-dish-plates-3771047.jpg'
 import womanDoingLaundry from '../../media/woman-wearing-white-towel-while-washing-clothes-2180947.jpg'
@@ -34,9 +35,9 @@ class LandingPage extends Component {
             
                
                 <main>
-                    {this.props.isLoggedIn && <TasksNav />}
+                    {TokenService.hasAuthToken() && <TasksNav />}
                     <Header headerContent="Gamifying Household Chores" />
-                    {!this.props.isLoggedIn && <div className="signUpButton"><p className="signup"><Link to="/signup">Sign Up</Link></p></div>}
+                    {!TokenService.hasAuthToken() && <div className="signUpButton"><p className="signup"><Link to="/signup">Sign Up</Link></p></div>}
                     <LandingBodySection leftSection={bodyContent[0].leftSide} rightSection={bodyContent[0].rightSide}/>
                     <LandingBodySection leftSection={bodyContent[1].leftSide} rightSection={bodyContent[1].rightSide}/>
                     <LandingBodySection leftSection={bodyContent[2].leftSide} rightSection={bodyContent[2].rightSide}/>              
