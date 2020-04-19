@@ -1,15 +1,56 @@
 img{
+    margin-bottom: -6px;
     width: 100%;
 }
 
-.signUpButton{
-    padding: 2% 60px;
+.main-section{
+    padding: 0 0 0 0;
+    text-align: center;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
 }
 
-.signUpButton p {
-    background-color: darkgray;
-    width: 100px;
-    height: 40px;
-    margin: 0 auto;
-    padding-top: 10px;
+.main-section div{
+    display: inline-block;
+}
+
+.white{
+    background-color: white;
+    color: #2f6273;
+    font-size: 25px;
+
+}
+
+.white h3{
+    font-weight: 400;
+}
+
+.rose{
+    background-color: #DE837C;
+    color: white;
+    font-size: 25px; 
+}
+
+.rose h3{
+    font-weight: 400;
+}
+
+.left{
+    text-align: left;
+}
+
+.right{
+    text-align: right;
+}
+
+.flex-35{
+    flex-basis: 35%;
+}
+
+.flex-65{
+    flex-basis: 65%;
 }

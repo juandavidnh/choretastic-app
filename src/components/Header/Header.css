@@ -1,4 +1,55 @@
 .hero{
+    padding: 0% 60px 30% 70px;
+    text-align: center;
+    background-image: url('../../media/woman-celebrating-house-chores.jpg');
+    background-position: 50% 15%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.hero-box{
+    background-color: rgba(176, 216, 204);
+    padding: 3% 20px;
+    flex-basis: 30%;
+    margin-right: 150px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+}
+
+.hero-box h2{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 50px;
+
+}
+
+.signUpButton, .signup, .signUpButton a{
+    background-color: #DE837C !important;
+}
+
+.signUpButton{
+    border-radius: 10px;
+    font-size: 20px;
+    width: 120px;
+}
+
+.sub-header{
     padding: 5% 60px;
     text-align: center;
+    font-size: 25px;
+}
+
+.sub-header h3{
+    font-weight: 400;
+    line-height: 50px;
+    color: #2f6273;
 }

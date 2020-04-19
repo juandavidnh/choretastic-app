@@ -1,18 +1,27 @@
 import React, { Component } from 'react'
+import TokenService from '../../services/token-service'
+import TasksNav from '../../components/TasksNav/TasksNav'
+import { Link } from 'react-router-dom'
 import './Header.css'
 
 class Header extends Component {
-    static defaultProps = {
-        headerContent: null
-    }
 
 
 
     render() {
         return(
+            <>
             <section className = "hero">
-                <h2>{this.props.headerContent}</h2>
+                {TokenService.hasAuthToken() && <TasksNav />}
+                <section className = "hero-box">
+                    <h2>Gamify the household experience</h2>
+                    {!TokenService.hasAuthToken() && <div className="signUpButton"><p className="signup"><Link to="/signup">Sign Up</Link></p></div>}
+                </section>
             </section>
+            <section className="sub-header">
+                <h3>Choretastic motivates you and your<br /> family to get things done at home</h3>
+            </section>
+            </>
         )
     }
 }

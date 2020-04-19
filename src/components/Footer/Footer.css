@@ -1,10 +1,20 @@
 footer{
     padding: 3% 60px; 
     text-align: center;
-    background-color: grey;
+    background-color: #2f6273;
     display: flex;
     text-align: center;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    font-size: 23px;
+}
+
+.created-by{
+    color: white;
+}
+
+footer li{
+    display: inline-block;
+    margin-left: 20px;
 }

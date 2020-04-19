@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import TokenService from '../../services/token-service'
+import choretasticLogo from '../../media/choretastic-logo.png'
 import './Nav.css'
 
 class Nav extends Component {
@@ -28,7 +29,7 @@ class Nav extends Component {
     render() {
         return(
             <header>
-                <h1><Link to='/'>Choretastic</Link></h1>
+                <Link to='/'><img src={choretasticLogo} alt="choretastic-logo" className="choretastic-logo"/></Link>
                 <nav>
                     {TokenService.hasAuthToken()
                         ? this.renderLogoutLink()
