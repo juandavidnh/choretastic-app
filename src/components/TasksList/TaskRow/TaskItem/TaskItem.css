@@ -1,18 +1,26 @@
 
-.taskItem ul{
+.taskItem{
+    flex-basis: 35%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     padding-left: 0;
+    color: #2f6273;
 }
 
-.taskItem li{
-    display: inline-block;
-    
+.taskName{
+    flex-basis: 45%;
 }
 
-.taskItem{
-    flex-basis: 40%;
+.assignee{
+    flex-basis: 20%;
+    text-align: left;
+}
+
+.points{
+    flex-basis: 20%;
+    text-align: left;
 }
 
 .assignee{

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Header from '../../../components/Header/Header'
 import TasksList from '../../../components/TasksList/TasksList'
 import TasksNav from '../../../components/TasksNav/TasksNav'
 import TaskApiService from '../../../services/task-api-service'
@@ -69,11 +68,11 @@ class MyTasks extends Component {
         return(
                 <main>
                     <TasksNav path={this.props.match.path}/>
-                    <Header headerContent="Chore List" />
+                    <h2>Chore List</h2>
                     <ErrorBoundary>
                     { (this.state.tasks.length < 1 || this.state.users.length < 1 || this.state.tasks === "Enter your first task") 
                         ? <> 
-                            <h3>Add your first task</h3> 
+                            <br/><h3 className="addFirstTask">Congratulations! Now, add your first task</h3> 
                             <AddItem /> 
                         </> 
                         : <TasksList users={this.state.users} tasks={this.state.tasks} deleteTaskFunction={this.props.deleteTaskFunction} checkOffFunction={this.props.checkOffTaskFunction} taskDone={this.taskDone} taskDelete={this.taskDelete} />      

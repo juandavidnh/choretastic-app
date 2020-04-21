@@ -128,54 +128,71 @@ class AddFamilyMemberForm extends Component {
                 onSubmit = {this.handleSubmit}
                 className = "signUpForm"
             >
+            <div className="form-row">
+            <div>    
                 <label htmlFor="firstName">First Name:*</label>
-                <input 
+                <br/><input 
                     type="text" 
                     name="firstName" 
                     id="first-name" 
                     onChange={e => this.updateFirstName(e.target.value)}
                     required />
                 <br />{this.state.firstName.touched && <ValidationError message={firstNameError}/>}<br />
+            </div>
+            <div>
                 <label htmlFor="lastName">Last Name:*</label>
-                <input 
+                <br/><input 
                     type="text" 
                     name="lastName" 
                     id="last-name"
                     onChange={e => this.updateLastName(e.target.value)}
                     required />
                 <br />{this.state.lastName.touched && <ValidationError message={lastNameError}/>}<br />
+            </div>
+            </div>
+            <div className="form-row">
+            <div>
                 <label htmlFor="nickname">Nickname:</label>
-                <input 
+                <br/><input 
                     type="text" 
                     name="nickname" 
                     id="nickname" 
                     onChange={e => this.updateNickname(e.target.value)}/>
                 <br /><br />
+            </div>
+            <div>
                 <label htmlFor="email">Email:*</label>
-                <input 
+                <br/><input 
                     type="email" 
                     name="email" 
                     id="email" 
                     onChange={e => this.updateEmail(e.target.value)}
                     required />
                 <br />{this.state.email.touched && <ValidationError message={emailError}/>}<br />
+            </div>
+            </div>
+            <div className="form-row">
+            <div>
                 <label htmlFor="password">Password:*</label>
-                <input 
+                <br/><input 
                     type="password" 
                     name="password" 
                     id="password"
                     onChange={e => this.updatePassword(e.target.value)} 
                     required />
                 <br />{this.state.password.touched && <ValidationError message={passwordError}/>}<br />
+            </div>
+            <div>
                 <label htmlFor="repeatPassword">Repeat password:*</label>
-                <input 
+                <br/><input 
                     type="password" 
                     name="repeatPassword" 
                     id="repeat-password" 
                     onChange={e => this.updateRepeatPassword(e.target.value)} 
                     required />
                 <br />{this.state.repeatPassword.touched && <ValidationError message={repeatPasswordError}/>}<br />
-                
+            </div>
+            </div>
                 <button 
                     type="submit"
                     disabled={this.validateFirstName() || this.validateLastName() || this.validatePassword() || this.validateEmail() || this.validateRepeatPassword()}

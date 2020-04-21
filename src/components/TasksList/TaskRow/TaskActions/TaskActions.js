@@ -34,11 +34,9 @@ class TaskActions extends Component {
     render() {
         return(
             <div className = "taskActions">
-                <ul>
-                    <li><button type="button" onClick={this.handleCheckOff}>Done</button></li>
-                    <li><p><Link to={`/assign-task/`+this.props.task.id}>Assign</Link></p></li>
-                    <li><button type="button" onClick={this.handleDelete}>Delete</button></li>
-                </ul>
+                    <button className="done" type="button" onClick={this.handleCheckOff}>Done</button>
+                    <p className="assign"><Link to={`/assign-task/`+this.props.task.id}>Assign</Link></p>
+                    <button className="delete" type="button" onClick={this.handleDelete}>Delete</button>
             </div>
         )
     }

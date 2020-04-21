@@ -28,11 +28,11 @@ class LoginForm extends Component {
                 className = "loginForm"
             >
                 <label htmlFor="email">Email:</label>
-                <input type="email" name="email" id="email" />
+                <input type="email" name="email" id="email" /><br/>
                 <label htmlFor="password">Password:</label>
-                <input type="password" name="password" id="password" /><br/><br/>
+                <input type="password" name="password" id="password" /><br/>
+                <button className="loginButton" type='submit'>Submit</button>
                 <p><Link to="/signup">I don't have an account yet.</Link></p>
-                <button type='submit'>Submit</button>
             </form>
         )
     }

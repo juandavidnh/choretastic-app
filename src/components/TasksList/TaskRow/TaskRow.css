@@ -1,6 +1,5 @@
 .task-row{
-    background-color: #E0E0E0;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
 }

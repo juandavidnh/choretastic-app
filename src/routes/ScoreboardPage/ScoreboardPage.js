@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../../components/Header/Header'
 import ScoreBoardList from '../../components/ScoreboardList/ScoreBoardList'
 import TasksNav from '../../components/TasksNav/TasksNav'
 import UserApiService from '../../services/user-api-service'
@@ -25,8 +24,9 @@ class ScoreboardPage extends Component {
 
         return(       
                 <main className="scoreBoardPage">
+                    
                     <TasksNav path={this.props.match.path}/>
-                    <Header headerContent="Family Scoreboard"/>
+                    <h2>Scoreboard</h2>
                     <ScoreBoardList users={this.state.users} /> 
                     <div className="addFamilyMember"><p className="addMember"><Link to="/add-family-member">Add Family Member</Link></p></div>         
                 </main>

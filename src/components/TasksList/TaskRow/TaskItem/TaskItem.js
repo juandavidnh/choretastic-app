@@ -23,10 +23,8 @@ class TaskItem extends Component {
         return(
             <div className = "taskItem" onClick = {this.handleCheckOff}>
                 <h3 className = {'taskName ' + status}>{this.props.task.task_name}</h3>
-                <ul>  
-                    <li className="assignee">{assignee.first_name}</li>
-                    <li className="points">{this.props.task.points} points</li>
-                </ul>
+                <p className="assignee">{assignee.first_name}</p>
+                <p className="points">{this.props.task.points} points</p>
             </div>
         )
     }

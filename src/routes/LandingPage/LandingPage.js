@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../../components/Header/Header'
+import TasksNav from '../../components/TasksNav/TasksNav'
+import TokenService from '../../services/token-service'
 import './LandingPage.css'
 import manWashingDishes from '../../media/photo-of-a-man-washing-dish-plates-3771047.jpg'
 import womanDoingLaundry from '../../media/woman-wearing-white-towel-while-washing-clothes-2180947.jpg'
@@ -16,6 +18,7 @@ class LandingPage extends Component {
             
                
                 <main>
+                    {TokenService.hasAuthToken() && <TasksNav />}
                     <Header />
                     <section className="main-section rose">
                         <div className="bodySectionLeft left flex-35">

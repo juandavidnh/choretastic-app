@@ -2,14 +2,14 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color:blanchedalmond;
-
+    background-color:rgba(176, 216, 204);
+    
 }
 
 .taskNav li{
     display: inline-block;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .taskNav ul{
@@ -18,4 +18,8 @@
 
 .bold{
     font-weight: bold;
+}
+
+.taskNav li a{
+    color: #2f6273;
 }

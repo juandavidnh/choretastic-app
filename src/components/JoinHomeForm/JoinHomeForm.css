@@ -3,10 +3,13 @@ p{
 }
 
 .button{
-    height: 40px;
-    width: 150px;
-    background-color: lightgrey;
     margin: 0 auto;
-    margin-bottom: 20px;
-    padding-top: 0.5em;
+    margin-bottom: 40px;
+    
+}
+
+.submitJoinHome{
+    text-align: center;
+    padding: 1rem;
+    margin-top: 10px;
 }

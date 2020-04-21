@@ -1,11 +1,21 @@
 .addFamilyMember{
     padding: 2% 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .addFamilyMember p {
-    background-color: darkgray;
-    width: 150px;
-    height: 40px;
+    background-color: #DE837C;
+    width: 250px;
+    height: 50px;
     margin: 0 auto;
     padding-top: 10px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.addFamilyMember a{
+    color: white;
+    font-size: 20px;
 }

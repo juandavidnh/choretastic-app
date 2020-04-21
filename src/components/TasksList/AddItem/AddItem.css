@@ -1,16 +1,22 @@
 .addItem{
-    padding: 3% 30px;
+    padding: 1% 30px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color:  #E0E0E0;
+    margin-bottom: 50px;
 }
 
 .addItem p {
-    background-color: darkgray;
-    width: 100px;
-    height: 40px;
+    background-color: #DE837C;    
+    border-radius: 10px;
+    width: 130px;
+    height: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.addItem a{
+    color: white;
+    font-size: 20px;
 }

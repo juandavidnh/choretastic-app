@@ -23,7 +23,7 @@ class AddTaskForm extends Component {
                 className = "addTaskForm"
             >
                 <label htmlFor="taskName">Task Name:</label>
-                <input type="text" name="taskName" id="task-name" /><br /><br />
+                <input type="text" name="taskName" id="task-name" /><br />
                 <label htmlFor="taskValue">Number of points (1-10):</label>
                 <select id="task-value" name="taskValue">
                     <option value="1">1</option>
@@ -36,7 +36,7 @@ class AddTaskForm extends Component {
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
-                </select><br /><br />
+                </select><br />
                 <label htmlFor="taskOwner">Assignee:</label>
                 <select id="task-owner" name="taskOwner">
                     {this.props.users.map((item) =>
@@ -44,8 +44,8 @@ class AddTaskForm extends Component {
                         key={item.id} 
                         value={item.id}
                     >{item.first_name}</option>)}
-                </select><br /><br />
-                <button type="submit">Submit</button>
+                </select><br />
+                <button className="addTaskButton" type="submit">Submit</button>
         </form>
         )
     }

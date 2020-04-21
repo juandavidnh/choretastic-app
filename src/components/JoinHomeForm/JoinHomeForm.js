@@ -47,18 +47,17 @@ class JoinHomeForm extends Component {
                     name="homeName" 
                     id="home-name" 
                     onChange={e => this.updateHomeName(e.target.value)}/>
-                    <br /><br />
+                    <br />
                 <label htmlFor="password">Password:</label>
                 <input 
                     type="password" 
                     name="password" 
                     id="password"
-                    onChange={e => this.updatePassword(e.target.value)} />
-                    <br /><br />
-                <button type="submit">Submit</button>
+                    onChange={e => this.updatePassword(e.target.value)} /><br />
+                    
+                <button className="submitJoinHome" type="submit">Submit</button>
             </form>
-            <p>-----Or-----</p>
-            <p className="button"><Link to='/add-home'>Create a home</Link></p>
+            <p className="button"><Link to='/add-home'>You don't want to join a home? Create a new one.</Link></p>
             </>
         )
     }

@@ -91,25 +91,24 @@ class AddHomeForm extends Component {
                     name="homeName" 
                     id="home-name" 
                     onChange={e => this.updateName(e.target.value)}
-                /><br />{this.state.homeName.touched && <ValidationError message={homeNameError}/>}<br />
-                
-                <label htmlFor="password">Password (new home members will need to enter this pasword):</label>
+                /><br />{this.state.homeName.touched && <><ValidationError message={homeNameError}/><br /></>}    
+                <label htmlFor="password">Password:</label>
                 <input 
                     type="password" 
                     name="password" 
                     id="password" 
                     onChange={e => this.updatePassword(e.target.value)}
-                /><br />{this.state.password.touched && <ValidationError message={passwordError}/>}<br />
-                
+                /><br />{this.state.password.touched && <><ValidationError message={passwordError}/><br /></>}
                 <label htmlFor="repeatPassword">Repeat password:</label>
                 <input 
                     type="password" 
                     name="repeatPassword" 
                     id="repeat-password" 
                     onChange={e => this.updateRepeatPassword(e.target.value)}
-                /><br />{this.state.password.touched && <ValidationError message={repeatPasswordError}/>}<br />
+                /><br />{this.state.password.touched && <><ValidationError message={repeatPasswordError}/><br /></>}
         
                 <button 
+                    className="submitAddHome"
                     type="submit"
                     disabled={this.validateHomeName() || this.validatePassword() || this.validateRepeatPassword()}
                 >Submit</button>
