@@ -1,3 +1,10 @@
 .instructions{
     color: #2f6273
 }
+
+@media screen and (max-width: 375px){
+    .instructions{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

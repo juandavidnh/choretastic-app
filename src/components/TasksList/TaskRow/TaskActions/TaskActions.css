@@ -44,3 +44,22 @@
 .taskActions .assign a{
     color: white;
 }
+
+@media screen and (max-width: 768px){
+    .taskActions{
+        flex-basis: 28%;
+    }
+}
+
+@media screen and (max-width: 375px){
+    .taskActions{
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-bottom: 5%;
+        margin-top: -10px;
+    }
+
+    .assign, .done, .delete{
+        flex-basis: 31%;
+    }
+}

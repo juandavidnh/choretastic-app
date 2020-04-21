@@ -2,3 +2,7 @@
     padding: 1rem;
     margin-bottom: 40px;
 }
+
+.addTaskForm input{
+    width: 189px;
+}

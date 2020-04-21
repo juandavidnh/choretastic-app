@@ -1,3 +1,7 @@
 .loginButton{
     padding: 1rem;
 }
+
+.loginForm input{
+    width: 80%;
+}

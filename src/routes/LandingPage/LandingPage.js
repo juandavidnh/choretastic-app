@@ -21,7 +21,7 @@ class LandingPage extends Component {
                     {TokenService.hasAuthToken() && <TasksNav />}
                     <Header />
                     <section className="main-section rose">
-                        <div className="bodySectionLeft left flex-35">
+                        <div className="image bodySectionLeft left flex-35">
                             <img src={manWashingDishes} alt="man-washing-dishes"/>
                         </div>
                         <div className="bodySectionRight flex-65">
@@ -32,12 +32,12 @@ class LandingPage extends Component {
                         <div className="bodySectionLeft flex-65">
                             <h3>Get to the first place.</h3>
                         </div>
-                        <div className="bodySectionRight right flex-35">
+                        <div className="image bodySectionRight right flex-35">
                             <img src={womanDoingLaundry} alt="woman-doing-laundry"/>
                         </div>
                     </section>
                     <section className="main-section rose ">
-                        <div className="bodySectionLeft left flex-35">
+                        <div className="image bodySectionLeft left flex-35">
                             <img src={manCleaningTable} alt="man-cleaning-table"/>
                         </div>
                         <div className="bodySectionRight flex-65">

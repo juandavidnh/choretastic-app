@@ -19,4 +19,11 @@
     font-weight: bold;
 }
 
+@media screen and (max-width: 375px){
+    .scoreBoardList{
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-bottom: 30px;
+    }
+}
 

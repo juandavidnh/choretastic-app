@@ -31,3 +31,17 @@
 .taskDone{
     text-decoration: line-through;
 }
+
+@media screen and (max-width: 768px){
+    .taskItem{
+        flex-basis: 50%;
+    }
+}
+
+@media screen and (max-width: 375px){
+    .taskItem{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+

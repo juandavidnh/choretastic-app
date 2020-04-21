@@ -54,3 +54,29 @@ img{
 .flex-65{
     flex-basis: 65%;
 }
+
+@media screen and (max-width: 768px){
+    .white{
+        font-size: 18px;
+    }
+
+    .rose{
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 375px){
+    .image img{
+        display: none;
+    }
+
+    .main-section{
+        text-align: center;
+        flex-direction: column;
+        font-size: 13px;
+        padding: 5% 20px;
+    }
+
+
+}
+

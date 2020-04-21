@@ -2,3 +2,7 @@
     padding: 1rem;
     margin-bottom: 40px;
 }
+
+.addHomeForm input{
+    width: 80%;
+}
