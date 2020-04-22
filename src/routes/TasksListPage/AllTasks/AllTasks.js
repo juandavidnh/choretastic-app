@@ -21,13 +21,7 @@ class AllTasks extends Component {
     
 
     componentDidMount(){
-        TaskApiService.getTasks() 
-            .then(tasks => {
-                this.setState({
-                    tasks: tasks
-                })
-            })
-            .catch(res => alert(res.error))
+        this.getTasks()
 
         UserApiService.getUsers() 
             .then(users => {
@@ -36,6 +30,26 @@ class AllTasks extends Component {
                 })
             })
             .catch(res => alert(res.error))
+    }
+
+    getTasks = (runs) => {
+        if(runs === undefined){
+            runs = 0
+        } 
+
+        TaskApiService.getTasks() 
+            .then(tasks => {
+                this.setState({
+                    tasks: tasks
+                })
+            })
+            .catch(res => {
+                if(runs > 5){
+                    alert(res.error)
+                } else {
+                    this.getTasks(runs + 1)
+                }
+            })
     }
 
     taskDone = (taskId) => {
