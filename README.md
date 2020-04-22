@@ -15,7 +15,7 @@ In order to test a demo account, use the following log in credentials:
 
 ### Instuctions
 
-1. Run the app in development mode with 'npm start.'
+1. Access [https://choretastic.now.sh/](https://choretastic.now.sh/)
 2. In the landing page, click 'Sign In.'
 ![Image of landing page](/src/media/screenshots/landing.png)
 3. Enter the demo credentials.
