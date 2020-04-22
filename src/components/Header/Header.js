@@ -17,6 +17,9 @@ class Header extends Component {
             </section>
             <section className="sub-header">
             <h3>Choretastic motivates you and your family to get things done at home</h3>
+            <p>To Access demo account user these Log In credentials</p>
+            <p>Email: jd@choretastic.com</p>
+            <p>Password: jd-choretastic</p>
             </section>
             </>
         )

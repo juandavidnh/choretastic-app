@@ -53,6 +53,13 @@
     line-height: 28px;
 }
 
+.sub-header p {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #2f6273;
+}
+
 .signUpButton a {
     color: white;
     font-size: 15px;
