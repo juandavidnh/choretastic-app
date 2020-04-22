@@ -5,6 +5,7 @@ import './SignUpForm.css'
 
 
 class SignUpForm extends Component {
+    //set state for live field validation
     state = {
         firstName: {
             value: "",
@@ -36,6 +37,7 @@ class SignUpForm extends Component {
         signUpFunction: () => {},   
     }
 
+    //group of functions that will update state as user fills in form
     updateFirstName(firstName){
         this.setState({ firstName: { value: firstName, touched: true } })
     }
@@ -60,6 +62,7 @@ class SignUpForm extends Component {
         this.setState({ repeatPassword: { value: repeatPassword, touched: true } })
     }
 
+    //extract values from form fields and pass them down to signUpFunction
     handleSubmit = ev => {
             ev.preventDefault()
 
@@ -74,6 +77,7 @@ class SignUpForm extends Component {
             this.props.signUpFunction(emailVal, passwordVal, repeatPasswordVal, firstNameVal, lastNameVal, nicknameVal)
     }
 
+    //validation functions
     validateFirstName() {
         const firstName = this.state.firstName.value.trim();
         if(firstName.length === 0) {

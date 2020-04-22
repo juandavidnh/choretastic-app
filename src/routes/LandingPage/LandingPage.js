@@ -18,6 +18,7 @@ class LandingPage extends Component {
             
                
                 <main>
+                    {/*only show tasksNav when the user is logged in*/}
                     {TokenService.hasAuthToken() && <TasksNav />}
                     <Header />
                     <section className="main-section rose">

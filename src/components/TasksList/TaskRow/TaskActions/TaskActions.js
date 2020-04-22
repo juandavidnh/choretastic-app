@@ -15,9 +15,7 @@ class TaskActions extends Component {
         ev.preventDefault()
 
         const taskId = this.props.task.id
-
         this.props.deleteTaskFunction(taskId)
-
         this.props.taskDelete(taskId)
     }
 
@@ -25,9 +23,7 @@ class TaskActions extends Component {
         ev.preventDefault()
 
         const taskId = this.props.task.id
-
         this.props.checkOffTaskFunction(taskId)
-
         this.props.taskDone(taskId)
     }
 

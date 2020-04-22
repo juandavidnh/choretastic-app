@@ -4,6 +4,7 @@ import ValidationError from '../../errorHandling/ValidationError'
 import './AddHomeForm.css'
 
 class AddHomeForm extends Component {
+    //set state for live field validation
     state = {
         homeName: {
             value: "",
@@ -23,6 +24,7 @@ class AddHomeForm extends Component {
         addHomeFunction: () => {},
     }
 
+    //group of functions that will update state as user fills in form
     updateName(name){
         this.setState({ homeName: { value: name, touched: true } })
     }
@@ -35,6 +37,7 @@ class AddHomeForm extends Component {
         this.setState({ repeatPassword: { value: repeatPassword, touched: true } })
     }
 
+    //extract values from form fields and pass them down to addFamilyMemberFunction
     handleSubmit = ev => {
             ev.preventDefault()
             const { homeName, password, repeatPassword } = this.state
@@ -46,6 +49,7 @@ class AddHomeForm extends Component {
             this.props.addHomeFunction(homeNameV, passwordV, repeatPasswordV)
     }
 
+    //validation functions
     validateHomeName() {
         const homeName = this.state.homeName.value.trim();
         if(homeName.length === 0) {

@@ -21,8 +21,10 @@ class AllTasks extends Component {
     
 
     componentDidMount(){
+        //fill state with user's own tasks by calling recursive function
         this.getTasks()
 
+        //fill state with users who belong to logged in user's home
         UserApiService.getUsers() 
             .then(users => {
                 this.setState({
@@ -32,6 +34,8 @@ class AllTasks extends Component {
             .catch(res => alert(res.error))
     }
 
+
+    //recursive function to avoid server errors
     getTasks = (runs) => {
         if(runs === undefined){
             runs = 0
@@ -53,6 +57,7 @@ class AllTasks extends Component {
     }
 
     taskDone = (taskId) => {
+        //apply a strike-through to task that is completed by updating its state
         const tasks = this.state.tasks
         const task = tasks.find(task => parseInt(task.id) === parseInt(taskId))
         const taskIndex = tasks.indexOf(task)
@@ -66,6 +71,7 @@ class AllTasks extends Component {
     }
 
     taskDelete = (taskId) => {
+        //delete task from state so that it no longer renders
         const tasks = this.state.tasks
         const task = tasks.find(task => parseInt(task.id) === parseInt(taskId))
         const taskIndex = tasks.indexOf(task)
@@ -88,6 +94,7 @@ class AllTasks extends Component {
                     <ErrorBoundary>
                     { (this.state.tasks.length < 1 || this.state.users.length < 1 || this.state.tasks === "Enter your first task") 
                         ? <> 
+                            {/*if no tasks are found render message asking user to add first task*/}
                             <h3 className="addFirstTask">Congratulations! Now, add your first task</h3> 
                             <AddItem /> 
                         </> 

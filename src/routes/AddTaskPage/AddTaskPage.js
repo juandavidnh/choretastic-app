@@ -13,6 +13,7 @@ class AddTaskPage extends Component {
     }
 
     componentDidMount(){
+        //fill state with users that belong to logged in user's home
         UserApiService.getUsers() 
             .then(users => {
                 this.setState({
@@ -27,6 +28,7 @@ class AddTaskPage extends Component {
             <main>
                 <section className="add-task-page">
                     <h2>Add Task</h2>
+                    {/*users will be passed down in order to render user first names within assign task form*/}
                     <AddTaskForm
                         addTaskFunction={this.props.addTaskFunction} 
                         users={this.state.users}

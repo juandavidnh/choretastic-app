@@ -11,12 +11,14 @@ class TaskItem extends Component {
     
         let assignee
 
+        //if only one user pass object directly, else pass array
         if(Array.isArray(this.props.users)){
             assignee = this.props.users.find(user => parseInt(user.id) === parseInt(this.props.task.assignee_id))
         }else{
             assignee = this.props.users
         }
 
+        //add class to task_name so that it's striken-though if task completed
         let status = this.props.task.status === "complete" ? "taskDone" : null
         
         

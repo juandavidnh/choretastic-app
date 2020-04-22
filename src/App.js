@@ -24,13 +24,7 @@ import './App.css'
 
 class App extends React.Component {
 
-  state = {
-    homes: [],
-    tasks: [],
-    users: [],
-    error: null,
-    isLoggedIn: false
-  }
+  //API Functions that will get passed down to their respective components
 
   addHome = (name, password, repeatPassword) => {
     if (password !== repeatPassword) {
@@ -42,6 +36,7 @@ class App extends React.Component {
       password
     })
       .then(home => {
+        //once home is posted, get signed up user and assign new home to him/her
         UserApiService.getMyUser()
           .then(user => {
             UserApiService.insertHome(user.id, home.id)
@@ -82,6 +77,7 @@ class App extends React.Component {
       nickname
     })
       .then(res => {
+        //generate new token for signed up user
         TokenService.saveAuthToken(res.authToken)
         this.props.history.push('/join-home')
       })
@@ -103,11 +99,14 @@ class App extends React.Component {
   }
 
   joinHome = (password, homeName) => {
+    /*once user is logged in or signed up, he'll need to provide a home name and password
+    to join a pre-existing home*/
     AuthApiService.postLoginHome({
       home_name: homeName,
       password
     })
       .then(home => {
+        //if login to home is successful user is assigned such home
         UserApiService.getMyUser()
           .then(user => {
             UserApiService.insertHome(user.id, home.id)
@@ -137,15 +136,19 @@ class App extends React.Component {
   }
 
   checkOffTask = (taskId) => {
+    //get task to be checked off with task_id
     TaskApiService.getTask(taskId)
       .then(task => {
+        //check off such task
         TaskApiService.checkOffTask(task.id)
 
         return task
       })
       .then(task => {
+        //once task is checked off, get assignee id
         UserApiService.getById(task.assignee_id)
           .then(user => {
+            //add points corresponding to task to assignee
             const newPoints = user.points + task.points
 
             UserApiService.addPoints(user.id, newPoints)

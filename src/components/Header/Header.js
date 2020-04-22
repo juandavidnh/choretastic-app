@@ -4,17 +4,6 @@ import { Link } from 'react-router-dom'
 import './Header.css'
 
 class Header extends Component {
-    state = {
-        isMobile: false,
-    }
-
-    componentDidMount() {
-        window.addEventListener('resize', () => {
-            this.setState({
-                isMobile: window.innerWidth <= 375
-            })
-        }, false)
-    }
 
     render() {
         return(

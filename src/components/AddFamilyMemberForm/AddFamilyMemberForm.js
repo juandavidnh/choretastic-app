@@ -5,6 +5,7 @@ import './AddFamilyMemberForm.css'
 
 
 class AddFamilyMemberForm extends Component {
+    //set state for live field validation
     state = {
         firstName: {
             value: "",
@@ -36,6 +37,9 @@ class AddFamilyMemberForm extends Component {
         addFamilyMemberFunction: () => {},   
     }
 
+
+    //set of functions that will update state as user fills in form
+
     updateFirstName(firstName){
         this.setState({ firstName: { value: firstName, touched: true } })
     }
@@ -60,6 +64,7 @@ class AddFamilyMemberForm extends Component {
         this.setState({ repeatPassword: { value: repeatPassword, touched: true } })
     }
 
+    //extract values from form fields and pass them down to addFamilyMemberFunction
     handleSubmit = ev => {
             ev.preventDefault()
 
@@ -74,6 +79,7 @@ class AddFamilyMemberForm extends Component {
             this.props.addFamilyMemberFunction(emailVal, passwordVal, repeatPasswordVal, firstNameVal, lastNameVal, nicknameVal)
     }
 
+    //validation functions
     validateFirstName() {
         const firstName = this.state.firstName.value.trim();
         if(firstName.length === 0) {

@@ -53,6 +53,7 @@ class JoinHomeForm extends Component {
                     type="password" 
                     name="password" 
                     id="password"
+                    autoComplete="on"
                     onChange={e => this.updatePassword(e.target.value)} /><br />
                     
                 <button className="submitJoinHome" type="submit">Submit</button>

@@ -9,6 +9,8 @@ class Nav extends Component {
         TokenService.clearAuthToken()
     }
 
+    //functions will render appropriated buttons depending on the user's logged in status
+
     renderLogoutLink() {
         return(
             <ul>

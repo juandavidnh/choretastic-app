@@ -11,6 +11,7 @@ class ScoreboardPage extends Component {
     }
 
     componentDidMount(){
+        //fill state with users from the same home as logged in user in order to render home scoreboard
         UserApiService.getUsers() 
             .then(users => {
                 this.setState({
