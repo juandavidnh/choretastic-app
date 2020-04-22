@@ -22,6 +22,11 @@ a {
     text-decoration: none;
     color: white;
     font-weight: 600;
+    
+}
+
+.nav-item a {
+    text-shadow: 1px 1px #c7d0d8;
 }
 
 h1 {

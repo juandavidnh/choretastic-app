@@ -12,7 +12,7 @@ class Nav extends Component {
     renderLogoutLink() {
         return(
             <ul>
-                <li><Link to='/' onClick={this.handleLogoutClick}>Log Out</Link></li>
+                <li className="nav-item"><Link to='/' onClick={this.handleLogoutClick}>Log Out</Link></li>
             </ul>
         )
     }
@@ -20,8 +20,8 @@ class Nav extends Component {
     renderLoginLink() {
         return(
             <ul>
-                <li><Link to='/signup'>Sign up</Link></li>
-                <li><Link to='/login'>Sign in</Link></li>
+                <li className="nav-item"><Link to='/signup'>Sign up</Link></li>
+                <li className="nav-item"><Link to='/login'>Sign in</Link></li>
             </ul>
         )
     }
