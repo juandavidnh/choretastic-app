@@ -32,6 +32,10 @@ In order to test a demo account, use the following log in credentials:
 8. In order to add a new task, click 'My Tasks' or 'All Tasks' and then 'Add Task.'
 ![Instructions add task](src/media/screenshots/addTask.png)
 
+## Live App
+
+Find a live version of choretastic at: [https://choretastic.now.sh/](https://choretastic.now.sh/)
+
 ## Available Scripts
 
 In the project directory, you can run:
