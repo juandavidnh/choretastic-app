@@ -1,5 +1,5 @@
 .hero{
-    padding: 0% 60px 30% 70px;
+    padding: 0% 0px 30% 70px;
     text-align: center;
     background-image: url('../../media/woman-celebrating-house-chores.jpg');
     background-position: 50% 15%;
@@ -15,7 +15,7 @@
     background-color: rgba(176, 216, 204);
     padding: 3% 20px;
     flex-basis: 30%;
-    margin-right: 150px;
+    margin-right: 0px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@
 .hero-box h2{
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
-    font-size: 50px;
+    font-size: 25px;
     color: white;
 }
 
@@ -36,27 +36,29 @@
 
 .signUpButton{
     border-radius: 10px;
-    width: 120px;
+    width: 100px;
 }
 
 .sub-header{
     padding: 5% 60px;
     text-align: center;
-    font-size: 25px;
+
 }
 
 .sub-header h3{
     font-weight: 400;
     line-height: 50px;
     color: #2f6273;
+    font-size: 17px;
+    line-height: 28px;
 }
 
 .signUpButton a {
     color: white;
-    font-size: 20px;
+    font-size: 15px;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (min-width: 768px){
     .hero{
         padding-right: 0;
     }
@@ -69,35 +71,36 @@
         font-size: 35px;
     }
     
-    .sub-header{
+    .sub-header h3{
         font-size: 20px;
         line-height: 40px;
     }
 
-}
-
-@media screen and (max-width: 375px){
-    .hero-box{
-        margin-right: 0;
-    }
-
-    .hero-box h2{
-        font-size: 25px;
+    .signUpButton{
+        width: 120px;
     }
 
     .signUpButton a {
         color: white;
-        font-size: 15px;
+        font-size: 20px;
     }
 
-    .signUpButton{
-        width: 100px;
+}
+
+@media screen and (min-width: 1280px){
+    .hero-box{
+        margin-right: 150px;
+    }
+
+    .hero-box h2{
+        font-size: 50px;
     }
 
     .sub-header h3{
-        font-size: 17px;
-        line-height: 28px;
+        font-size: 30px;
     }
     
-    
+    .hero{
+        padding-right: 60px;
+    }
 }

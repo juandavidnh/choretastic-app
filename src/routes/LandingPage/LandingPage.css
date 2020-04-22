@@ -4,11 +4,12 @@ img{
 }
 
 .main-section{
-    padding: 0 0 0 0;
+    padding: 5% 20px;
+    
     text-align: center;
     display: flex;
     text-align: center;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: 0;
@@ -21,7 +22,7 @@ img{
 .white{
     background-color: white;
     color: #2f6273;
-    font-size: 25px;
+    font-size: 13px;
 
 }
 
@@ -32,7 +33,7 @@ img{
 .rose{
     background-color: #DE837C;
     color: white;
-    font-size: 25px; 
+    font-size: 13px; 
 }
 
 .rose h3{
@@ -55,7 +56,15 @@ img{
     flex-basis: 65%;
 }
 
-@media screen and (max-width: 768px){
+.image img{
+    display: none;
+}
+
+@media screen and (min-width: 768px){
+    .image img{
+        display: inline-block;
+    }
+
     .white{
         font-size: 18px;
     }
@@ -63,20 +72,21 @@ img{
     .rose{
         font-size: 18px;
     }
-}
-
-@media screen and (max-width: 375px){
-    .image img{
-        display: none;
-    }
 
     .main-section{
-        text-align: center;
-        flex-direction: column;
-        font-size: 13px;
-        padding: 5% 20px;
+        flex-direction: row;
+        padding: 0 0 0 0;
+    }
+}
+
+@media screen and (min-width: 1280px){ 
+
+    .white{
+        font-size: 25px;
     }
 
-
+    .rose{
+        font-size: 25px;
+    }
 }
 

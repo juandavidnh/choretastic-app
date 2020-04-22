@@ -14,8 +14,12 @@ p{
     margin-top: 10px;
 }
 
-@media screen and (max-width: 375px){
+.joinHomeForm input{
+    width: 80%;
+}
+
+@media screen and (min-width: 768px){
     .joinHomeForm input{
-        width: 80%;
+        width: 189px;
     }
 }

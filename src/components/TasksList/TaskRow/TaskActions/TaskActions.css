@@ -13,11 +13,15 @@
 
 
 .taskActions {
-    flex-basis: 15%;
+    flex-basis: 28%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 5%;
+    margin-top: -10px;
 }
 
 .taskActions .done{
@@ -45,21 +49,25 @@
     color: white;
 }
 
-@media screen and (max-width: 768px){
+.assign, .done, .delete{
+    flex-basis: 31%;
+}
+
+@media screen and (min-width: 768px){
     .taskActions{
         flex-basis: 28%;
+        padding-right: 0px;
+        padding-left: 0px;
+        padding-bottom: 0;
+        margin-top: 0px;
     }
 }
 
-@media screen and (max-width: 375px){
+@media screen and (min-width: 1280px){
     .taskActions{
-        padding-right: 20px;
-        padding-left: 20px;
-        padding-bottom: 5%;
-        margin-top: -10px;
+        
+        flex-basis: 15%;
     }
 
-    .assign, .done, .delete{
-        flex-basis: 31%;
-    }
+    
 }

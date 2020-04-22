@@ -27,7 +27,7 @@ class Header extends Component {
                 </section>
             </section>
             <section className="sub-header">
-        <h3>Choretastic motivates you and your family to get things done at home</h3>
+            <h3>Choretastic motivates you and your family to get things done at home</h3>
             </section>
             </>
         )
