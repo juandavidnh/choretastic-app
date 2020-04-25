@@ -34,7 +34,7 @@ class AssignTaskForm extends Component {
                             key={item.id} 
                         >{item.first_name}</option>)}
                 </select>
-                <button class="assignTaskButton" type="submit">Submit</button>
+                <button className="assignTaskButton" type="submit">Submit</button>
             </form>
         )
     }

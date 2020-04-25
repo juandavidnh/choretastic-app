@@ -4,6 +4,7 @@ import './ScoreBoardItem.css'
 class ScoreBoardItem extends Component {
     static defaultProps = {
         user: null,
+        position: 0,
         score: 0
     }
 
